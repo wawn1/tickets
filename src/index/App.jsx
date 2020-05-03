@@ -8,7 +8,7 @@ import HighSpeed from './HighSpeed'
 import Journey from './Journey'
 import Submit from './Submit'
 
-const App = props => {
+const App = () => {
   const onBack = useCallback(() => {
     window.history.back()
   }, [])
@@ -17,10 +17,12 @@ const App = props => {
       <div className="header-wrapper">
         <Header title="火车票" onBack={onBack} />
       </div>
-      <Journey />
-      <DepartDate />
-      <HighSpeed />
-      <Submit />
+      <form action="./query.html" className="form">
+        <Journey />
+        <DepartDate />
+        <HighSpeed />
+        <Submit />
+      </form>
     </div>
   )
 }
