@@ -1,12 +1,16 @@
 import React, { useCallback } from 'react'
-import { appConnect } from './store/connects'
+import { appConnect, journeyConnect, cityConnect } from './store/connects'
 
 import './App.scss'
 import Header from '../common/Header'
+import _CitySelector from '../common/CitySelector'
 import DepartDate from './DepartDate'
 import HighSpeed from './HighSpeed'
-import Journey from './Journey'
+import _Journey from './Journey'
 import Submit from './Submit'
+
+const Journey = journeyConnect(_Journey)
+const CitySelector = cityConnect(_CitySelector)
 
 const App = () => {
   const onBack = useCallback(() => {
@@ -23,6 +27,7 @@ const App = () => {
         <HighSpeed />
         <Submit />
       </form>
+      <CitySelector />
     </div>
   )
 }

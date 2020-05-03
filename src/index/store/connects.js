@@ -1,9 +1,15 @@
-import { connect } from 'react-redux'
-import { exchangeFromTo, showCitySelector } from './actions'
+import {connect} from "react-redux";
+import {exchangeFromTo, showCitySelector, hideCitySelector, fetchCityData, setSelectedCity} from "./actions";
 
-export const appConnect = connect(state => ({}), {})
+export const appConnect = connect(state => ({}), {});
 
-export const journeyConnect = connect(state => ({ from: state.from, to: state.to }), {
+export const journeyConnect = connect(state => ({from: state.from, to: state.to}), {
   exchangeFromTo,
-  showCitySelector
-})
+  showCitySelector,
+});
+
+export const cityConnect = connect(state => ({show: state.showCitySelector, isLoading: state.isLoadingCity, cityData: state.cityData}), {
+  onBack: hideCitySelector,
+  fetchCityData,
+  setSelectedCity,
+});

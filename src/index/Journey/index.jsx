@@ -2,7 +2,6 @@ import React from 'react'
 
 import './index.scss'
 import switchSvg from './imgs/switch.svg'
-import { journeyConnect } from '../store/connects'
 
 const Journey = ({ from, to, exchangeFromTo, showCitySelector }) => {
   return (
@@ -19,4 +18,4 @@ const Journey = ({ from, to, exchangeFromTo, showCitySelector }) => {
     </div>
   )
 }
-export default journeyConnect(Journey)
+export default Journey
