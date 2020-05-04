@@ -1,4 +1,4 @@
-import {SET_FROM, SET_TO, CITYDATA, IS_LOADING_CITY, SHOW_CITY_SELECTOR, SIDE} from "./constants";
+import {SET_FROM, SET_TO, CITYDATA, IS_LOADING_CITY, SHOW_CITY_SELECTOR, SIDE, SHOW_DATE_SELECTOR, SET_DEPART_DATE} from "./constants";
 
 export function setFrom(from) {
   return {
@@ -95,5 +95,26 @@ export function setSelectedCity(city) {
       dispatch(setTo(city));
     }
     dispatch(hideCitySelector());
+  };
+}
+
+export function showDateSelector() {
+  return {
+    type: SHOW_DATE_SELECTOR,
+    payload: true,
+  };
+}
+
+export function setDepartDate(departDate) {
+  return {
+    type: SET_DEPART_DATE,
+    payload: departDate,
+  };
+}
+
+export function hideDateSelector() {
+  return {
+    type: SHOW_DATE_SELECTOR,
+    payload: false,
   };
 }

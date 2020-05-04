@@ -1,21 +1,22 @@
-import React, { useCallback } from 'react'
-import { appConnect, journeyConnect, cityConnect } from './store/connects'
+import React, {useCallback} from "react";
+import {appConnect, journeyConnect, cityConnect, departDateConnect} from "./store/connects";
 
-import './App.scss'
-import Header from '../common/Header'
-import _CitySelector from '../common/CitySelector'
-import DepartDate from './DepartDate'
-import HighSpeed from './HighSpeed'
-import _Journey from './Journey'
-import Submit from './Submit'
+import "./App.scss";
+import Header from "../common/Header";
+import _CitySelector from "../common/CitySelector";
+import _DepartDate from "./DepartDate";
+import HighSpeed from "./HighSpeed";
+import _Journey from "./Journey";
+import Submit from "./Submit";
 
-const Journey = journeyConnect(_Journey)
-const CitySelector = cityConnect(_CitySelector)
+const Journey = journeyConnect(_Journey);
+const CitySelector = cityConnect(_CitySelector);
+const DepartDate = departDateConnect(_DepartDate);
 
 const App = () => {
   const onBack = useCallback(() => {
-    window.history.back()
-  }, [])
+    window.history.back();
+  }, []);
   return (
     <div>
       <div className="header-wrapper">
@@ -29,6 +30,6 @@ const App = () => {
       </form>
       <CitySelector />
     </div>
-  )
-}
-export default appConnect(App)
+  );
+};
+export default appConnect(App);
