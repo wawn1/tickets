@@ -1,15 +1,64 @@
-import React, {useState, useEffect} from "react";
+import React, {memo, useState, useEffect, useCallback} from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
 import "./index.scss";
 
-const CityList = ({sections = [], onSelect}) => {
+const Suggest = memo(({searchKey, onSelect}) => {
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    fetch("/rest/search?key=" + encodeURIComponent(searchKey))
+      .then(res => res.json())
+      .then(data => {
+        const {result, searchKey: skey} = data;
+        if (skey === searchKey) {
+          if (!result.length) {
+            result = [{dispaly: searchKey}];
+          }
+          setResult(result);
+        }
+      });
+  }, [searchKey]);
+  return (
+    <div className="city-suggest">
+      <ul className="city-suggest-ul">
+        {result.map(({display: name}) => (
+          <li key={name} className="city-suggest-li" onClick={() => onSelect(name)}>
+            {name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+});
+
+Suggest.propTypes = {
+  searchKey: PropTypes.string.isRequired,
+};
+
+const AlphaIndex = memo(({alpha, onClick}) => {
+  return (
+    <i className="city-index-item" onClick={() => onClick(alpha)}>
+      {alpha}
+    </i>
+  );
+});
+AlphaIndex.propTypes = {
+  alpha: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+const alphabet = new Array(26).fill(65).map((val, idx) => String.fromCharCode(val + idx));
+
+const CityList = memo(({sections = [], onSelect}) => {
+  const toAlpha = useCallback(alpha => {
+    document.querySelector(`[data-section='${alpha}']`).scrollIntoView();
+  });
+  console.log("render CityList");
   return (
     <div className="city-list">
       {sections.map(({title, citys: cities = []}) => {
         return (
-          <ul className="city-ul" key={title}>
+          <ul className="city-ul" key={title} data-section={title}>
             <li className="city-li" key="title">
               {title}
             </li>
@@ -23,9 +72,14 @@ const CityList = ({sections = [], onSelect}) => {
           </ul>
         );
       })}
+      <div className="city-index">
+        {alphabet.map(alpha => {
+          return <AlphaIndex key={alpha} alpha={alpha} onClick={toAlpha} />;
+        })}
+      </div>
     </div>
   );
-};
+});
 
 CityList.propTypes = {
   sections: PropTypes.array.isRequired,
@@ -53,6 +107,15 @@ const CitySelector = ({show, isLoading, cityData, onBack, fetchCityData, setSele
     return <div>error</div>;
   };
 
+  const clear = useCallback(() => {
+    setSearchKey("");
+  });
+
+  useEffect(() => {
+    if (!show) {
+      clear();
+    }
+  }, [show]);
   return (
     <div className={classnames("city-selector", {hidden: !show})}>
       <div className="city-search">
@@ -71,9 +134,7 @@ const CitySelector = ({show, isLoading, cityData, onBack, fetchCityData, setSele
           />
         </div>
         <i
-          onClick={() => {
-            setSearchKey("");
-          }}
+          onClick={clear}
           className={classnames("search-clean", {
             hidden: searchKey.trim().length === 0,
           })}
@@ -82,6 +143,7 @@ const CitySelector = ({show, isLoading, cityData, onBack, fetchCityData, setSele
         </i>
       </div>
       {getCityList()}
+      {Boolean(searchKey) && <Suggest searchKey={searchKey} onSelect={setSelectedCity} />}
     </div>
   );
 };
