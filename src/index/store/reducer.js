@@ -1,4 +1,14 @@
-import {SET_FROM, SET_TO, CITYDATA, IS_LOADING_CITY, SHOW_CITY_SELECTOR, SIDE, SHOW_DATE_SELECTOR, SET_DEPART_DATE} from "./constants";
+import {
+  SET_FROM,
+  SET_TO,
+  CITYDATA,
+  IS_LOADING_CITY,
+  SHOW_CITY_SELECTOR,
+  SIDE,
+  SHOW_DATE_SELECTOR,
+  SET_DEPART_DATE,
+  SET_HIGH_SPEED,
+} from "./constants";
 
 const defaultState = {
   from: "北京",
@@ -9,6 +19,7 @@ const defaultState = {
   departDate: Date.now(),
   showDateSelector: false,
   side: "left",
+  highSpeed: false,
   set(key, value) {
     return {...this, [key]: value};
   },
@@ -33,6 +44,8 @@ export default (state = defaultState, action) => {
       return state.set("showDateSelector", payload);
     case SIDE:
       return state.set("side", payload);
+    case SET_HIGH_SPEED:
+      return state.set("highSpeed", payload);
     default:
       return state;
   }

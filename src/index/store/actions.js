@@ -1,4 +1,14 @@
-import {SET_FROM, SET_TO, CITYDATA, IS_LOADING_CITY, SHOW_CITY_SELECTOR, SIDE, SHOW_DATE_SELECTOR, SET_DEPART_DATE} from "./constants";
+import {
+  SET_FROM,
+  SET_TO,
+  CITYDATA,
+  IS_LOADING_CITY,
+  SHOW_CITY_SELECTOR,
+  SIDE,
+  SHOW_DATE_SELECTOR,
+  SET_DEPART_DATE,
+  SET_HIGH_SPEED,
+} from "./constants";
 import {h0} from "../../common/utils";
 
 export function setFrom(from) {
@@ -125,5 +135,15 @@ export function selectDay(dayTime) {
     if (!dayTime || dayTime < h0()) return;
     dispatch(setDepartDate(dayTime));
     dispatch(hideDateSelector());
+  };
+}
+
+export function toggleHighSpeed() {
+  return (dispatch, getState) => {
+    const {highSpeed} = getState();
+    dispatch({
+      type: SET_HIGH_SPEED,
+      payload: !highSpeed,
+    });
   };
 }

@@ -1,12 +1,12 @@
 import React, {useCallback} from "react";
-import {appConnect, journeyConnect, cityConnect, departDateConnect, dateSelectConnect} from "./store/connects";
+import {appConnect, journeyConnect, cityConnect, departDateConnect, dateSelectConnect, highSpeedConnect} from "./store/connects";
 
 import "./App.scss";
 import Header from "../common/Header";
 import _CitySelector from "../common/CitySelector";
 import _DateSelector from "../common/DateSelector";
 import _DepartDate from "./DepartDate";
-import HighSpeed from "./HighSpeed";
+import _HighSpeed from "./HighSpeed";
 import _Journey from "./Journey";
 import Submit from "./Submit";
 
@@ -14,6 +14,7 @@ const Journey = journeyConnect(_Journey);
 const CitySelector = cityConnect(_CitySelector);
 const DepartDate = departDateConnect(_DepartDate);
 const DateSelector = dateSelectConnect(_DateSelector);
+const HighSpeed = highSpeedConnect(_HighSpeed);
 
 const App = () => {
   const onBack = useCallback(() => {

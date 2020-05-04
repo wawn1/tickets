@@ -8,6 +8,7 @@ import {
   showDateSelector,
   hideDateSelector,
   selectDay,
+  toggleHighSpeed,
 } from "./actions";
 
 export const appConnect = connect(state => ({}), {});
@@ -25,3 +26,5 @@ export const cityConnect = connect(state => ({show: state.showCitySelector, isLo
 
 export const departDateConnect = connect(state => ({time: state.departDate}), {onClick: showDateSelector});
 export const dateSelectConnect = connect(state => ({show: state.showDateSelector}), {onBack: hideDateSelector, onSelect: selectDay});
+
+export const highSpeedConnect = connect(state => ({highSpeed: state.highSpeed}), {toggle: toggleHighSpeed});
