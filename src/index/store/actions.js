@@ -1,4 +1,5 @@
 import {SET_FROM, SET_TO, CITYDATA, IS_LOADING_CITY, SHOW_CITY_SELECTOR, SIDE, SHOW_DATE_SELECTOR, SET_DEPART_DATE} from "./constants";
+import {h0} from "../../common/utils";
 
 export function setFrom(from) {
   return {
@@ -116,5 +117,13 @@ export function hideDateSelector() {
   return {
     type: SHOW_DATE_SELECTOR,
     payload: false,
+  };
+}
+
+export function selectDay(dayTime) {
+  return dispatch => {
+    if (!dayTime || dayTime < h0()) return;
+    dispatch(setDepartDate(dayTime));
+    dispatch(hideDateSelector());
   };
 }

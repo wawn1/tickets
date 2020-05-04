@@ -10,7 +10,7 @@ const Suggest = memo(({searchKey, onSelect}) => {
     fetch("/rest/search?key=" + encodeURIComponent(searchKey))
       .then(res => res.json())
       .then(data => {
-        const {result, searchKey: skey} = data;
+        let {result, searchKey: skey} = data;
         if (skey === searchKey) {
           if (!result.length) {
             result = [{dispaly: searchKey}];

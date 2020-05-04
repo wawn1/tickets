@@ -1,5 +1,14 @@
 import {connect} from "react-redux";
-import {exchangeFromTo, showCitySelector, hideCitySelector, fetchCityData, setSelectedCity, showDateSelector} from "./actions";
+import {
+  exchangeFromTo,
+  showCitySelector,
+  hideCitySelector,
+  fetchCityData,
+  setSelectedCity,
+  showDateSelector,
+  hideDateSelector,
+  selectDay,
+} from "./actions";
 
 export const appConnect = connect(state => ({}), {});
 
@@ -15,3 +24,4 @@ export const cityConnect = connect(state => ({show: state.showCitySelector, isLo
 });
 
 export const departDateConnect = connect(state => ({time: state.departDate}), {onClick: showDateSelector});
+export const dateSelectConnect = connect(state => ({show: state.showDateSelector}), {onBack: hideDateSelector, onSelect: selectDay});
