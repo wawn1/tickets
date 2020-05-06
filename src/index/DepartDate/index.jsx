@@ -13,7 +13,7 @@ const DepartDate = ({time, onClick}) => {
   const weekString = "周" + ["日", "一", "二", "三", "四", "五", "六"][departDate.getDay()] + (isToday ? "(今天)" : "");
   return (
     <div className="depart-date" onClick={onClick}>
-      <input type="hidden" name="date" value={departDateString} />
+      <input type="hidden" name="date" value={h0OfDepart} />
       {departDateString}
       <span className="depart-week">{weekString}</span>
     </div>
