@@ -1,16 +1,17 @@
 import React, {useCallback, useEffect} from "react";
-import {appConnect, navConnect} from "./store/connects";
+import {appConnect, navConnect, detailConnect} from "./store/connects";
 import URI from "urijs";
 import dayjs from "dayjs";
 
 import "./App.scss";
-import Detail from "../common/Detail";
+import _Detail from "../common/Detail";
 import Header from "../common/Header";
 import _Nav from "../common/Nav";
 import Candidate from "./Candidate";
 import Schedule from "./Schedule";
 
 const Nav = navConnect(_Nav);
+const Detail = detailConnect(_Detail);
 
 const App = ({searchParsed, departDate, trainNumber, setQueries, updateDetailInfo}) => {
   const onBack = useCallback(() => {
@@ -57,6 +58,7 @@ const App = ({searchParsed, departDate, trainNumber, setQueries, updateDetailInf
       </div>
       <div className="nav-wrapper">
         <Nav />
+        <Detail />
       </div>
     </div>
   );
