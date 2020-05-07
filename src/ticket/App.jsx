@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, lazy, Suspense} from "react";
-import {appConnect, navConnect, detailConnect, scheduleConnect} from "./store/connects";
+import {appConnect, navConnect, detailConnect, scheduleConnect, candidateConnect} from "./store/connects";
 import URI from "urijs";
 import dayjs from "dayjs";
 
@@ -7,13 +7,15 @@ import "./App.scss";
 import _Detail from "../common/Detail";
 import Header from "../common/Header";
 import _Nav from "../common/Nav";
-import Candidate from "./Candidate";
+import _Candidate from "./Candidate";
 
 const Nav = navConnect(_Nav);
 const Detail = detailConnect(_Detail);
 
 const _Schedule = lazy(() => import("./Schedule"));
 const Schedule = scheduleConnect(_Schedule);
+
+const Candidate = candidateConnect(_Candidate);
 
 const App = ({searchParsed, departDate, trainNumber, showSchedule, setQueries, updateDetailInfo, toggleShowSchedule}) => {
   const onBack = useCallback(() => {
@@ -42,10 +44,10 @@ const App = ({searchParsed, departDate, trainNumber, showSchedule, setQueries, u
       .then(result => {
         const {
           detail: {departTimeStr, arriveTimeStr, arriveDate, durationStr},
-          candidate,
+          candidates,
         } = result;
 
-        updateDetailInfo({departTimeStr, arriveTimeStr, arriveDate, durationStr, candidate});
+        updateDetailInfo({departTimeStr, arriveTimeStr, arriveDate, durationStr, candidates});
       });
   }, [searchParsed, departDate, trainNumber]);
 
@@ -67,6 +69,7 @@ const App = ({searchParsed, departDate, trainNumber, showSchedule, setQueries, u
           </span>
           <span className="right"></span>
         </Detail>
+        <Candidate />
       </div>
       {showSchedule && (
         <div className="mask" onClick={toggleShowSchedule}>

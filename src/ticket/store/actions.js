@@ -118,12 +118,12 @@ export function prevDate() {
   };
 }
 
-export function updateDetailInfo({departTimeStr, arriveTimeStr, arriveDate, durationStr, candidate}) {
+export function updateDetailInfo({departTimeStr, arriveTimeStr, arriveDate, durationStr, candidates}) {
   return dispatch => {
     dispatch(setDepartTimeStr(departTimeStr));
     dispatch(setArriveTimeStr(arriveTimeStr));
     dispatch(setArriveDate(arriveDate));
     dispatch(setDurationStr(durationStr));
-    dispatch(setTickets(candidate));
+    dispatch(setTickets(candidates));
   };
 }

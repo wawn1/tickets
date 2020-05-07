@@ -37,3 +37,10 @@ export const scheduleConnect = connect(
   }),
   {}
 );
+
+export const candidateConnect = connect(({tickets}) => ({tickets}), {});
+
+export const channelConnect = connect(
+  ({trainNumber, departStation, arriveStation, departDate}) => ({trainNumber, departStation, arriveStation, departDate}),
+  {}
+);
