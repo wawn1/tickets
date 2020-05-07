@@ -20,7 +20,7 @@ const Detail = ({
   arriveStation,
   trainNumber,
   durationStr,
-  toggleShowSchedule,
+  children,
 }) => {
   const departDateStr = useMemo(() => weekDay(departDate), [departDate]);
   const arriveDateStr = useMemo(() => weekDay(arriveDate), [arriveDate]);
@@ -35,13 +35,7 @@ const Detail = ({
         </div>
         <div className="middle">
           <p className="train-name">{trainNumber}</p>
-          <p className="train-mid">
-            <span className="left"></span>
-            <span className="schedule" onClick={toggleShowSchedule}>
-              时刻表
-            </span>
-            <span className="right"></span>
-          </p>
+          <p className="train-mid">{children}</p>
           <p className="train-time">耗时{durationStr}</p>
         </div>
         <div className="right">

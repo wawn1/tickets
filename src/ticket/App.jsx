@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from "react";
-import {appConnect, navConnect, detailConnect} from "./store/connects";
+import React, {useCallback, useEffect, lazy, Suspense} from "react";
+import {appConnect, navConnect, detailConnect, scheduleConnect} from "./store/connects";
 import URI from "urijs";
 import dayjs from "dayjs";
 
@@ -8,12 +8,14 @@ import _Detail from "../common/Detail";
 import Header from "../common/Header";
 import _Nav from "../common/Nav";
 import Candidate from "./Candidate";
-import Schedule from "./Schedule";
 
 const Nav = navConnect(_Nav);
 const Detail = detailConnect(_Detail);
 
-const App = ({searchParsed, departDate, trainNumber, setQueries, updateDetailInfo}) => {
+const _Schedule = lazy(() => import("./Schedule"));
+const Schedule = scheduleConnect(_Schedule);
+
+const App = ({searchParsed, departDate, trainNumber, showSchedule, setQueries, updateDetailInfo, toggleShowSchedule}) => {
   const onBack = useCallback(() => {
     window.history.back();
   }, []);
@@ -58,8 +60,21 @@ const App = ({searchParsed, departDate, trainNumber, setQueries, updateDetailInf
       </div>
       <div className="nav-wrapper">
         <Nav />
-        <Detail />
+        <Detail>
+          <span className="left"></span>
+          <span className="schedule" onClick={toggleShowSchedule}>
+            时刻表
+          </span>
+          <span className="right"></span>
+        </Detail>
       </div>
+      {showSchedule && (
+        <div className="mask" onClick={toggleShowSchedule}>
+          <Suspense fallback={<div>loading</div>}>
+            <Schedule />
+          </Suspense>
+        </div>
+      )}
     </div>
   );
 };

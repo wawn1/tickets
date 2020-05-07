@@ -1,12 +1,16 @@
 import {connect} from "react-redux";
 import {setQueries, prevDate, nextDate, updateDetailInfo, toggleShowSchedule} from "./actions";
 // connect(({})=>({}),{})
-export const appConnect = connect(({departDate, trainNumber, searchParsed}) => ({departDate, trainNumber, searchParsed}), {
-  setQueries,
-  prevDate,
-  nextDate,
-  updateDetailInfo,
-});
+export const appConnect = connect(
+  ({departDate, trainNumber, searchParsed, showSchedule}) => ({departDate, trainNumber, searchParsed, showSchedule}),
+  {
+    setQueries,
+    prevDate,
+    nextDate,
+    updateDetailInfo,
+    toggleShowSchedule,
+  }
+);
 
 export const navConnect = connect(({departDate}) => ({date: departDate}), {prev: prevDate, next: nextDate});
 
@@ -21,5 +25,15 @@ export const detailConnect = connect(
     trainNumber,
     durationStr,
   }),
-  {toggleShowSchedule}
+  {}
+);
+
+export const scheduleConnect = connect(
+  ({departDate, trainNumber, departStation, arriveStation}) => ({
+    date: departDate,
+    trainNumber: trainNumber,
+    departStation: departStation,
+    arriveStation: arriveStation,
+  }),
+  {}
 );
