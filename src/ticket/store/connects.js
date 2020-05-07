@@ -1,4 +1,11 @@
 import {connect} from "react-redux";
-import actions from "./actions";
+import {setQueries, prevDate, nextDate, updateDetailInfo} from "./actions";
+// connect(({})=>({}),{})
+export const appConnect = connect(({departDate, trainNumber, searchParsed}) => ({departDate, trainNumber, searchParsed}), {
+  setQueries,
+  prevDate,
+  nextDate,
+  updateDetailInfo,
+});
 
-export const appConnect = connect((state) => state.main, {...actions});
+export const navConnect = connect(({departDate}) => ({date: departDate}), {prev: prevDate, next: nextDate});
