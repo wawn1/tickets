@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {appConnect, detailConnect, ticketConnect, menuConnect} from "./store/connects";
+import {appConnect, detailConnect, ticketConnect, menuConnect, accountConnect} from "./store/connects";
 import URI from "urijs";
 import dayjs from "dayjs";
 import {useDeepCompareEffect} from "react-use";
@@ -7,8 +7,7 @@ import {useDeepCompareEffect} from "react-use";
 import "./App.scss";
 import _Detail from "../common/Detail";
 import Header from "../common/Header";
-import Account from "./Account";
-import Choose from "./Choose";
+import _Account from "./Account";
 import Passengers from "./Passengers";
 import _Ticket from "./Ticket";
 import _Menu from "./Menu";
@@ -16,6 +15,7 @@ import _Menu from "./Menu";
 const Detail = detailConnect(_Detail);
 const Ticket = ticketConnect(_Ticket);
 const Menu = menuConnect(_Menu);
+const Account = accountConnect(_Account);
 
 const App = ({params, searchParsed, setQueries, fetchInitial}) => {
   const onBack = useCallback(() => {

@@ -49,3 +49,7 @@ export const passengerConnect = connect(({}) => ({}), {
 });
 
 export const passengersConnect = connect(({passengers}) => ({passengers}), {createAdult, createChild});
+
+export const chooseConnect = connect(({passengers}) => ({passengers}), {updatePassenger});
+
+export const accountConnect = connect(({price, passengers}) => ({price, length: passengers.length}), {});

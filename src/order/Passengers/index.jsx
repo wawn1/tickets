@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./index.scss";
-import {passengerConnect, passengersConnect} from "../store/connects";
+import {passengerConnect, passengersConnect, chooseConnect} from "../store/connects";
+import _Choose from "../Choose";
 
 const _Passenger = props => {
   const {id, name, followAdult, ticketType, licenseNo, gender, birthday} = props;
@@ -103,6 +104,7 @@ _Passenger.propTypes = {
 };
 
 const Passenger = passengerConnect(_Passenger);
+const Choose = chooseConnect(_Choose);
 
 const Passengers = ({passengers, createAdult, createChild}) => {
   return (
@@ -120,6 +122,7 @@ const Passengers = ({passengers, createAdult, createChild}) => {
           添加儿童
         </div>
       </section>
+      {passengers.length > 0 && <Choose />}
     </div>
   );
 };
